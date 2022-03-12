@@ -21,7 +21,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.config.getConfig().subscribe((config: Config) => {
       this.authService.login(config.authUrl).subscribe(() => {
-        this.http.get(config.userUrl).subscribe((data: any) => {
+        this.http.get(`${config.userUrl}?username=simulacoin`).subscribe((data: any) => {
           this.title = data.username;
         })
       });
