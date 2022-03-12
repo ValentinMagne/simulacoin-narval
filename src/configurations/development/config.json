@@ -1,3 +1,4 @@
 {
-  "greetingUrl": "//localhost:8080/greeting"
+  "authUrl": "//localhost:8080/authenticate",
+  "userUrl": "//localhost:8080/user"
 }

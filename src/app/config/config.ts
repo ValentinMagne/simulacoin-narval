@@ -1,7 +1,9 @@
 export class Config {
-  public greetingUrl: string;
+  public authUrl: string;
+  public userUrl: string;
 
-  constructor(greetingUrl: string) {
-    this.greetingUrl = greetingUrl;
+  constructor(authUrl: string, userUrl: string) {
+    this.authUrl = authUrl;
+    this.userUrl = userUrl;
   }
 }

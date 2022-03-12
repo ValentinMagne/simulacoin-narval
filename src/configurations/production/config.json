@@ -1,3 +1,4 @@
 {
-  "greetingUrl": "//simulacoin-sierra.herokuapp.com/greeting"
+  "authUrl": "//simulacoin-sierra.herokuapp.com/authenticate",
+  "userUrl": "//simulacoin-sierra.herokuapp.com/user"
 }
