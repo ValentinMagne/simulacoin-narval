@@ -7,12 +7,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRootComponent } from './components/app-root/app-root.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { MaterialModule } from "./modules/material.module";
 
 @NgModule({
   declarations: [
     AppRootComponent,
+    HomeComponent,
     LoginComponent
   ],
   imports: [

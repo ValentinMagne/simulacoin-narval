@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Observable, ReplaySubject } from 'rxjs';
+import { Router } from "@angular/router";
 
 import { AuthService } from '../services/auth.service';
 import { LoginService } from '../services/login.service';
@@ -14,7 +15,8 @@ export class LoginStoreService {
   private _currentUser$: ReplaySubject<User> = new ReplaySubject<User>(1);
 
   constructor(private readonly authService: AuthService,
-              private readonly loginService: LoginService) {
+              private readonly loginService: LoginService,
+              private readonly router: Router) {
   }
 
   //////////////////////
@@ -25,6 +27,7 @@ export class LoginStoreService {
     this.authService.login(username, password).subscribe(() => {
       this.loginService.getUser(username).subscribe((user: User) => {
         this._currentUser$.next(user);
+        this.router.navigate(['home']);
       });
     });
   }
