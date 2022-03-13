@@ -1,21 +1,18 @@
-import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { Observable, ReplaySubject } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
 
-import { AuthService } from '../services/auth.service';
-import { LoginService } from '../services/login.service';
-import { User } from '../models/user';
+import { AuthService } from "../services/auth.service";
+import { RouteEnum } from "../enums/route.enum";
+import { UserService } from "../services/user.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginStoreService {
 
-  private _currentUser$: ReplaySubject<User> = new ReplaySubject<User>(1);
-
   constructor(private readonly authService: AuthService,
-              private readonly loginService: LoginService,
+              private readonly userService: UserService,
               private readonly router: Router) {
   }
 
@@ -25,9 +22,8 @@ export class LoginStoreService {
 
   public login(username: string, password: string): void {
     this.authService.login(username, password).subscribe(() => {
-      this.loginService.getUser(username).subscribe((user: User) => {
-        this._currentUser$.next(user);
-        this.router.navigate(['home']);
+      this.userService.getUser(username).subscribe(() => {
+        this.router.navigate([RouteEnum.HOME]);
       });
     });
   }
@@ -35,10 +31,6 @@ export class LoginStoreService {
   //////////////////////
   //  QUERIES
   //////////////////////
-
-  public get currentUser$(): Observable<User> {
-    return this._currentUser$.asObservable();
-  }
 
   public get form(): FormGroup {
     return new FormGroup({

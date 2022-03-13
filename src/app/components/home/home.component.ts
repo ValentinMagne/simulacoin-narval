@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LoginStoreService } from "../../stores/login-store.service";
+import { UserService } from "../../services/user.service";
 
 @Component({
   selector: 'app-home',
@@ -8,9 +8,9 @@ import { LoginStoreService } from "../../stores/login-store.service";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  public currentUser$ = this.loginStore.currentUser$;
+  public currentUser$ = this.userService.currentUser$;
 
-  constructor(private readonly loginStore: LoginStoreService) {
+  constructor(private readonly userService: UserService) {
   }
 
   ngOnInit(): void {
