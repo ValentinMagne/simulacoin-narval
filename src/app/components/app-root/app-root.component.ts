@@ -8,7 +8,6 @@ import { AppRootStoreService } from '../../stores/app-root-store.service';
   styleUrls: ['./app-root.component.scss']
 })
 export class AppRootComponent implements OnInit, OnDestroy {
-  title = 'simulacoin-narval';
 
   constructor(private readonly appRootStore: AppRootStoreService) {
   }

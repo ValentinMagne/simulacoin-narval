@@ -1,0 +1,25 @@
+<mat-toolbar color="primary">
+  <span>Simulacoin</span>
+  <span class="spacer"></span>
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu" xPosition="before">
+    <button mat-menu-item>
+      <mat-icon>currency_bitcoin</mat-icon>
+      <span>Bitcoin</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>account_balance_wallet</mat-icon>
+      <span>Compte</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>pets</mat-icon>
+      <span>NFT</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>logout</mat-icon>
+      <span>Déconnexion</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>

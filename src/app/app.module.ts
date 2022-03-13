@@ -10,12 +10,14 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { MaterialModule } from "./modules/material.module";
+import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
   declarations: [
     AppRootComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    MenuComponent
   ],
   imports: [
     AppRoutingModule,
