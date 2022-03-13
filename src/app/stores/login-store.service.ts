@@ -40,19 +40,16 @@ export class LoginStoreService {
     });
   }
 
+  public leave(): void {
+    this._form.reset();
+    this.snackBar.dismiss();
+  }
+
   //////////////////////
   //  QUERIES
   //////////////////////
 
   public get form(): FormGroup {
     return this._form;
-  }
-
-  //////////////////////
-  //  PRIVATE COMMANDS
-  //////////////////////
-
-  private openSnackBarOnLoginFailed(): void {
-
   }
 }

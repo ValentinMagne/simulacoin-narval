@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { LoginStoreService } from "../../stores/login-store.service";
@@ -8,13 +8,14 @@ import { LoginStoreService } from "../../stores/login-store.service";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnDestroy {
   public form: FormGroup = this.loginStore.form;
 
   constructor(private readonly loginStore: LoginStoreService) {
   }
 
-  ngOnInit(): void {
+  ngOnDestroy(): void {
+    this.loginStore.leave();
   }
 
   submit() {
