@@ -32,10 +32,6 @@ export class AuthService {
     localStorage.removeItem(AuthService.TOKEN_KEY);
   }
 
-  public isLogged(): boolean {
-    return localStorage.getItem(AuthService.TOKEN_KEY) !== null;
-  }
-
   private static setSession(authResult: AuthBusiness): void {
     localStorage.setItem(AuthService.TOKEN_KEY, authResult.token);
   }

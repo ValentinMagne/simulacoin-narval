@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
+import { Router } from "@angular/router";
 import { take } from 'rxjs/operators';
 
 import { Config } from '../config/config';
@@ -12,7 +13,8 @@ export class ConfigStoreService {
 
   private _config$: ReplaySubject<Config> = new ReplaySubject<Config>(1);
 
-  constructor(private readonly config: ConfigService) {
+  constructor(private readonly config: ConfigService,
+              private readonly router: Router) {
   }
 
   public enter(): void {
@@ -20,6 +22,7 @@ export class ConfigStoreService {
       .pipe(take(1))
       .subscribe((config: Config) => {
         this._config$.next(config);
+        this.router.navigate(['login']);
       })
   }
 

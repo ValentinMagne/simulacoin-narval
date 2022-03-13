@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Observable, ReplaySubject } from 'rxjs';
 
 import { AuthService } from '../services/auth.service';
@@ -20,9 +21,9 @@ export class LoginStoreService {
   //  COMMANDS
   //////////////////////
 
-  public enter(): void {
-    this.authService.login('simulacoin', 'azerty').subscribe(() => {
-      this.loginService.getUser('simulacoin').subscribe((user: User) => {
+  public login(username: string, password: string): void {
+    this.authService.login(username, password).subscribe(() => {
+      this.loginService.getUser(username).subscribe((user: User) => {
         this._currentUser$.next(user);
       });
     });
@@ -34,5 +35,12 @@ export class LoginStoreService {
 
   public get currentUser$(): Observable<User> {
     return this._currentUser$.asObservable();
+  }
+
+  public get form(): FormGroup {
+    return new FormGroup({
+      username: new FormControl(null, [Validators.required]),
+      password: new FormControl(null, [Validators.required])
+    });
   }
 }

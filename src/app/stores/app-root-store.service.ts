@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { AuthService } from '../services/auth.service';
 import { ConfigStoreService } from './config-store.service';
@@ -8,8 +7,7 @@ import { ConfigStoreService } from './config-store.service';
 export class AppRootStoreService {
 
   constructor(private readonly authService: AuthService,
-              private readonly configStore: ConfigStoreService,
-              private readonly router: Router) {
+              private readonly configStore: ConfigStoreService) {
   }
 
   //////////////////////
@@ -18,9 +16,6 @@ export class AppRootStoreService {
 
   public enter(): void {
     this.configStore.enter();
-    if (!this.authService.isLogged()) {
-      this.router.navigate(['login']);
-    }
   }
 
   public leave(): void {
