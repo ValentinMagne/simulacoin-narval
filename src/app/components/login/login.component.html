@@ -1,8 +1,9 @@
 <form [formGroup]="form" (ngSubmit)="submit()" autocomplete="off" class="login-form">
   <p>
     <mat-form-field>
-      <mat-label>Nom</mat-label>
+      <mat-label>Identifiant</mat-label>
       <input matInput type="text" formControlName="username">
+      <mat-icon matSuffix>perm_identity</mat-icon>
       <mat-error *ngIf="form.get('username')?.errors">Veuillez saisir un identifiant</mat-error>
     </mat-form-field>
   </p>
@@ -10,6 +11,7 @@
     <mat-form-field>
       <mat-label>Mot de passe</mat-label>
       <input matInput type="password" formControlName="password">
+      <mat-icon matSuffix>lock</mat-icon>
       <mat-error *ngIf="form.get('password')?.errors">Veuillez saisir un mot de passe</mat-error>
     </mat-form-field>
   </p>

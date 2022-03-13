@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { MenuStoreService } from "../../stores/menu-store.service";
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(public menuStore: MenuStoreService) { }
 
   ngOnInit(): void {
   }
