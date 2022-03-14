@@ -1,4 +1,4 @@
-<ng-container *ngIf="showSpinner | async; else content">
+<ng-container *ngIf="(showSpinner | async) === true; else content">
   <div class="centered-items-container spinner-container">
     <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
   </div>
