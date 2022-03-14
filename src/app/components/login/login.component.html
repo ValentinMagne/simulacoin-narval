@@ -1,19 +1,37 @@
-<form [formGroup]="form" (ngSubmit)="submit()" autocomplete="off" class="login-form">
-  <p>
-    <mat-form-field>
-      <mat-label>Identifiant</mat-label>
-      <input matInput type="text" formControlName="username">
-      <mat-icon matSuffix>perm_identity</mat-icon>
-      <mat-error *ngIf="form.get('username')?.errors">Veuillez saisir un identifiant</mat-error>
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field>
-      <mat-label>Mot de passe</mat-label>
-      <input matInput type="password" formControlName="password">
-      <mat-icon matSuffix>lock</mat-icon>
-      <mat-error *ngIf="form.get('password')?.errors">Veuillez saisir un mot de passe</mat-error>
-    </mat-form-field>
-  </p>
-  <button mat-raised-button type="submit" [disabled]="!form.valid">Login</button>
-</form>
+<ng-container *ngIf="showSpinner | async; else content">
+  <div class="centered-items-container spinner-container">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+</ng-container>
+<ng-template #content>
+  <div class="centered-items-container">
+    <form [formGroup]="form" (ngSubmit)="submit()" autocomplete="off" class="centered-items-container">
+      <p>
+        <mat-form-field>
+          <mat-label>Identifiant</mat-label>
+          <input matInput type="text" formControlName="username">
+          <mat-icon matSuffix>perm_identity</mat-icon>
+          <mat-error *ngIf="form.get('username')?.errors">Veuillez saisir un identifiant</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <mat-label>Mot de passe</mat-label>
+          <input matInput type="password" formControlName="password">
+          <mat-icon matSuffix>lock</mat-icon>
+          <mat-error *ngIf="form.get('password')?.errors">Veuillez saisir un mot de passe</mat-error>
+        </mat-form-field>
+      </p>
+      <button mat-raised-button type="submit" [disabled]="!form.valid">Login</button>
+    </form>
+    <p>
+      <mat-card class="centered-items-container">
+        <mat-card-title>Utiliser un compte de test</mat-card-title>
+        <mat-card-content>
+          <button mat-raised-button color="accent" (click)="loginWithTestAccount()">Me connecter avec un compte de test
+          </button>
+        </mat-card-content>
+      </mat-card>
+    </p>
+  </div>
+</ng-template>

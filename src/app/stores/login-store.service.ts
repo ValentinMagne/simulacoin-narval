@@ -1,3 +1,4 @@
+import { BehaviorSubject, Observable } from "rxjs";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from "@angular/material/snack-bar";
@@ -12,6 +13,7 @@ import { UserService } from "../services/user.service";
 })
 export class LoginStoreService {
 
+  private _showSpinner$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private readonly _form: FormGroup;
 
   constructor(private readonly authService: AuthService,
@@ -29,18 +31,21 @@ export class LoginStoreService {
   //////////////////////
 
   public login(username: string, password: string): void {
+    this._showSpinner$.next(true);
     this.snackBar.dismiss();
     this.authService.login(username, password).subscribe(() => {
       this.userService.getUser(username).subscribe(() => {
         this.router.navigate([RouteEnum.HOME]);
       });
     }, () => {
+      this._showSpinner$.next(false);
       this._form.reset();
       this.snackBar.open("Identifiant ou mot de passe incorrect", "Fermer");
     });
   }
 
   public leave(): void {
+    this._showSpinner$.next(false);
     this._form.reset();
     this.snackBar.dismiss();
   }
@@ -51,5 +56,9 @@ export class LoginStoreService {
 
   public get form(): FormGroup {
     return this._form;
+  }
+
+  public get showSpinner$(): Observable<boolean> {
+    return this._showSpinner$.asObservable();
   }
 }

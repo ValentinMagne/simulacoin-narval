@@ -1,5 +1,9 @@
-.login-form {
-  display: flex;
+.centered-items-container {
   flex-direction: column;
+  display: flex;
   align-items: center;
+}
+
+.spinner-container {
+  margin-top: 50%;
 }
