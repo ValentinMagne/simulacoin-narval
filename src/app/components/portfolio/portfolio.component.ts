@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { PortfolioStoreService } from '../../stores/portfolio-store.service';
 
@@ -7,16 +7,20 @@ import { PortfolioStoreService } from '../../stores/portfolio-store.service';
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.scss']
 })
-export class PortfolioComponent implements OnInit {
+export class PortfolioComponent implements OnInit, OnDestroy {
 
   public transactions$ = this.portfolioStore.transactions$;
-  public displayedColumns = ['type', 'openAt', 'openDate', 'opened'];
+  public displayedColumns = ['invested', 'openedAt', 'unit', 'profitAndLoss'];
 
   constructor(private readonly portfolioStore: PortfolioStoreService) {
   }
 
   ngOnInit(): void {
     this.portfolioStore.enter();
+  }
+
+  ngOnDestroy(): void {
+    this.portfolioStore.leave();
   }
 
 }

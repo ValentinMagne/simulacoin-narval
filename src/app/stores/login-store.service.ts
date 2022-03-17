@@ -38,6 +38,7 @@ export class LoginStoreService {
       this.userService.getUser(username).subscribe(() => {
         this.router.navigate([RouteEnum.HOME]);
       }, (err) => {
+        // TODO use interceptor ?
         console.warn("err on get user");
         this.router.navigate([RouteEnum.ERROR]);
         //throwError(err);
