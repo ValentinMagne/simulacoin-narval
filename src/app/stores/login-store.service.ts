@@ -38,8 +38,8 @@ export class LoginStoreService {
         this.router.navigate([RouteEnum.HOME]);
       });
     }, () => {
-      this._showSpinner$.next(false);
       this._form.reset();
+      this._showSpinner$.next(false);
       this.snackBar.open("Identifiant ou mot de passe incorrect", "Fermer");
     });
   }

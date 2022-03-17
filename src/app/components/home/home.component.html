@@ -1,3 +1,22 @@
 <ng-container *ngIf='currentUser$ | async as user'>
-  <p>Hello {{user.username}}</p>
+  <h1>Crypto</h1>
+  <p>
+    <mat-card>
+      <mat-card-title><span>BTC</span></mat-card-title>
+      <mat-card-subtitle>Bitcoin</mat-card-subtitle>
+      <mat-card-content>$ {{bitcoin$ | async}}</mat-card-content>
+      <mat-divider inset></mat-divider>
+      <mat-card-actions align="end">
+        <button mat-raised-button color="accent" type="button">Acheter</button>
+      </mat-card-actions>
+    </mat-card>
+  </p>
+  <h1>Capital</h1>
+  <p>
+    <mat-card>
+      <mat-card-title>
+        <span>$ {{user.purse.balance}}</span>
+      </mat-card-title>
+    </mat-card>
+  </p>
 </ng-container>

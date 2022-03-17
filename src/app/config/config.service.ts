@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Config } from './config';
+import { SKIP_AUTH_BEARER } from "../interceptors/auth.interceptor";
 
 @Injectable({providedIn: 'root'})
 export class ConfigService {
@@ -12,6 +13,8 @@ export class ConfigService {
   }
 
   getConfig() {
-    return this.http.get<Config>(this.configUrl);
+    return this.http.get<Config>(this.configUrl, {
+      context: new HttpContext().set(SKIP_AUTH_BEARER, true)
+    });
   }
 }
