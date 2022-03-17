@@ -21,7 +21,7 @@ export class PortfolioStoreService {
   //////////////////////
 
   public enter(): void {
-    const refreshRateInSeconds = 60;
+    const refreshRateInSeconds = 20;
     this.subscription = interval(refreshRateInSeconds * 1000).pipe(
       startWith(0),
       switchMap(() => this.bitcoinService.getBitcoin())
