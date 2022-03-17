@@ -5,17 +5,13 @@
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu" xPosition="before">
-    <button mat-menu-item>
+    <button mat-menu-item (click)="menuStore.goToHome()">
       <mat-icon>currency_bitcoin</mat-icon>
-      <span>Bitcoin</span>
+      <span>Accueil</span>
     </button>
-    <button mat-menu-item>
+    <button mat-menu-item (click)="menuStore.goToPortfolio()">
       <mat-icon>account_balance_wallet</mat-icon>
-      <span>Compte</span>
-    </button>
-    <button mat-menu-item>
-      <mat-icon>pets</mat-icon>
-      <span>NFT</span>
+      <span>Portefeuille</span>
     </button>
     <button mat-menu-item (click)="menuStore.logout()">
       <mat-icon>logout</mat-icon>

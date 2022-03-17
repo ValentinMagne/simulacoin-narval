@@ -11,13 +11,17 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { MaterialModule } from "./modules/material.module";
 import { MenuComponent } from './components/menu/menu.component';
+import { PortfolioComponent } from './components/portfolio/portfolio.component';
+import { ErrorComponent } from './components/error/error.component';
 
 @NgModule({
   declarations: [
     AppRootComponent,
     HomeComponent,
     LoginComponent,
-    MenuComponent
+    MenuComponent,
+    PortfolioComponent,
+    ErrorComponent
   ],
   imports: [
     AppRoutingModule,

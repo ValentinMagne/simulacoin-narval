@@ -1,3 +1,4 @@
+import { catchError } from "rxjs/operators";
 import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
 
@@ -5,6 +6,7 @@ import { AuthService } from '../services/auth.service';
 import { ConfigStoreService } from './config-store.service';
 import { RouteEnum } from "../enums/route.enum";
 import { UserService } from "../services/user.service";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Injectable({providedIn: 'root'})
 export class AppRootStoreService {
@@ -21,11 +23,12 @@ export class AppRootStoreService {
 
   public enter(): void {
     this.configStore.save().subscribe(() => {
-      this.authService.tryLogin().subscribe(() => {
-        this.router.navigate([RouteEnum.HOME]);
-      }, () => {
-        this.router.navigate([RouteEnum.LOGIN]);
-      })
+      this.authService.tryLogin().pipe(
+        catchError((err: Error) => {
+          this.router.navigate([RouteEnum.LOGIN]);
+          throw err;
+        })
+      ).subscribe();
     });
   }
 

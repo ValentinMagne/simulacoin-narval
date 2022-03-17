@@ -1,4 +1,6 @@
 export enum RouteEnum {
+  ERROR = 'error',
   HOME = 'home',
-  LOGIN = 'login'
+  LOGIN = 'login',
+  PORTFOLIO = 'portfolio'
 }

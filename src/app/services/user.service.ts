@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, mergeMap } from 'rxjs/operators';
-import { Observable, ReplaySubject } from 'rxjs';
+import { catchError, map, mergeMap } from 'rxjs/operators';
+import { Observable, ReplaySubject, throwError } from 'rxjs';
 
 import { Config } from '../config/config';
 import { ConfigStoreService } from '../stores/config-store.service';
@@ -27,7 +27,7 @@ export class UserService {
             return user;
           })
         );
-      })
+      }), catchError((err) => throwError(err))
     );
   }
 

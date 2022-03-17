@@ -1,0 +1,24 @@
+<ng-container *ngIf="(transactions$ | async) as transactions">
+  <h1>Portefeuille</h1>
+  <table mat-table [dataSource]="transactions" class="mat-elevation-z8 portfolio-table">
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>Type</th>
+      <td mat-cell *matCellDef="let element">{{element.type}}</td>
+    </ng-container>
+    <ng-container matColumnDef="openAt">
+      <th mat-header-cell *matHeaderCellDef>Ouvert</th>
+      <td mat-cell *matCellDef="let element">{{element.openedAt}}</td>
+    </ng-container>
+    <ng-container matColumnDef="openDate">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let element">{{element.openDate | date}}</td>
+    </ng-container>
+    <ng-container matColumnDef="opened">
+      <th mat-header-cell *matHeaderCellDef>Ouvert</th>
+      <td mat-cell *matCellDef="let element">{{element.opened}}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <h1>Historique</h1>
+</ng-container>
