@@ -31,7 +31,7 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let element; columns: displayedColumns;"
         class="example-element-row"
-        [class.example-expanded-row]="expandedElement === element"
+        [class.example-expanded-row]="element['openDate'] === expandedElement?.openDate"
         (click)="expandedElement = expandedElement?.openDate === element['openDate'] ? null : element">
     </tr>
     <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
