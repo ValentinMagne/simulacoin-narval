@@ -14,8 +14,8 @@
       <td mat-cell *matCellDef="let element">{{element[displayedColumns[2]]}}</td>
     </ng-container>
     <ng-container matColumnDef="{{displayedColumns[3]}}">
-      <th mat-header-cell *matHeaderCellDef>G/P$</th>
-      <td mat-cell *matCellDef="let element">{{element[displayedColumns[3]]}}</td>
+      <th mat-header-cell *matHeaderCellDef>G/P</th>
+      <td mat-cell *matCellDef="let element" appProfitAndLoss [value]="element[displayedColumns[3]]"></td>
     </ng-container>
 
     <ng-container matColumnDef="expandedDetail">
@@ -36,5 +36,29 @@
     </tr>
     <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
   </table>
-  <h1>Historique</h1>
+  <ng-container *ngIf="(historic$ | async) as historic">
+    <h1>Historique</h1>
+    <div class="historic-container">
+      <p class="historic-item">
+        <mat-card class="mat-elevation-z8">
+          <mat-card-title>
+            <span>Investi</span>
+          </mat-card-title>
+          <mat-card-content>
+            <span>{{historic.invested | currency}}</span>
+          </mat-card-content>
+        </mat-card>
+      </p>
+      <p class="historic-item">
+        <mat-card class="mat-elevation-z8">
+          <mat-card-title>
+            <span>G/P</span>
+          </mat-card-title>
+          <mat-card-content>
+            <span appProfitAndLoss [value]="historic.profitAndLoss"></span>
+          </mat-card-content>
+        </mat-card>
+      </p>
+    </div>
+  </ng-container>
 </ng-container>

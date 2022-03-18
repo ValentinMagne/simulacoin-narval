@@ -19,6 +19,7 @@ import { PortfolioTransaction } from "../../models/portfolio-transaction";
 export class PortfolioComponent implements OnInit, OnDestroy {
 
   public transactions$ = this.portfolioStore.transactions$;
+  public historic$ = this.portfolioStore.historic$;
   public displayedColumns = ['invested', 'openedAt', 'unit', 'profitAndLoss'];
   public expandedElement: PortfolioTransaction | undefined;
 
