@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { interval, Observable, ReplaySubject, Subscription } from "rxjs";
+import { MatDialog } from "@angular/material/dialog";
+import { Router } from "@angular/router";
 import { startWith, switchMap } from "rxjs/operators";
 
 import { BitcoinService } from "../services/bitcoin.service";
+import { BuyDialogComponent } from "../components/buy-dialog/buy-dialog.component";
 import { RouteEnum } from "../enums/route.enum";
-import { Router } from "@angular/router";
+import { UserService } from "../services/user.service";
 
 @Injectable({providedIn: 'root'})
 export class HomeStoreService {
@@ -12,8 +15,10 @@ export class HomeStoreService {
   private _bitcoin$: ReplaySubject<number> = new ReplaySubject<number>(1);
   private subscription: Subscription | undefined;
 
-  constructor(private readonly bitcoinService: BitcoinService,
-              private readonly router: Router) {
+  constructor(public dialog: MatDialog,
+              private readonly bitcoinService: BitcoinService,
+              private readonly router: Router,
+              private readonly userService: UserService) {
   }
 
   //////////////////////
@@ -31,6 +36,19 @@ export class HomeStoreService {
 
   public leave(): void {
     this.subscription?.unsubscribe();
+  }
+
+  public openBuyDialog(): void {
+    const dialogRef = this.dialog.open(BuyDialogComponent, {
+      width: '250px',
+      data: {price: 50},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+          this.userService.buy(result).subscribe();
+      }
+    });
   }
 
   //////////////////////

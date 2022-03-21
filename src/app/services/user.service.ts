@@ -31,6 +31,19 @@ export class UserService {
     );
   }
 
+  public buy(quantity: number): Observable<User> {
+    return this.configStore.config$.pipe(
+      mergeMap((config: Config) => {
+        return this.http.put<User>(`${config.buyUrl}?price=${quantity}`, {}).pipe(
+          map((user: User) => {
+            this._currentUser$.next(user);
+            return user;
+          })
+        );
+      }), catchError((err) => throwError(err))
+    );
+  }
+
   public get currentUser$(): Observable<User> {
     return this._currentUser$.asObservable();
   }

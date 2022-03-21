@@ -23,4 +23,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.homeStore.leave();
   }
+
+  public openBuyDialog(): void {
+    this.homeStore.openBuyDialog();
+  }
 }

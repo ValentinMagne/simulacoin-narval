@@ -7,7 +7,7 @@
       <mat-card-content>$ {{bitcoin$ | async}}</mat-card-content>
       <mat-divider inset></mat-divider>
       <mat-card-actions align="end">
-        <button mat-raised-button color="accent" type="button">Acheter</button>
+        <button mat-raised-button color="accent" type="button" (click)="openBuyDialog()">Acheter</button>
       </mat-card-actions>
     </mat-card>
   </p>

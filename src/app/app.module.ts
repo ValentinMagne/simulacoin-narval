@@ -1,9 +1,9 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { CurrencyPipe } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRootComponent } from './components/app-root/app-root.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +15,7 @@ import { MaterialModule } from "./modules/material.module";
 import { MenuComponent } from './components/menu/menu.component';
 import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { ProfitAndLossDirective } from './directives/profit-and-loss.directive';
+import { BuyDialogComponent } from './components/buy-dialog/buy-dialog.component';
 
 @NgModule({
   declarations: [
@@ -24,12 +25,14 @@ import { ProfitAndLossDirective } from './directives/profit-and-loss.directive';
     LoginComponent,
     MenuComponent,
     PortfolioComponent,
-    ProfitAndLossDirective
+    ProfitAndLossDirective,
+    BuyDialogComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
+    FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
     MaterialModule
