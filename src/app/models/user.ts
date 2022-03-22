@@ -11,6 +11,7 @@ interface Purse {
 }
 
 export interface Transaction {
+  id: number;
   type: TransactionTypeNum;
   invested: number;
   openedAt: number;

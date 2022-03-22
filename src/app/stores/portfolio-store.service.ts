@@ -47,6 +47,10 @@ export class PortfolioStoreService {
     this.subscription?.unsubscribe();
   }
 
+  public sell(transactionId: number) {
+    this.userService.sell(transactionId).subscribe();
+  }
+
   //////////////////////
   //  QUERIES
   //////////////////////
@@ -69,7 +73,7 @@ export class PortfolioStoreService {
       .map((t: Transaction) => {
         const unit: number = PortfolioStoreService.getUnit(t.invested, t.openedAt);
         const profitAndLoss: number = PortfolioStoreService.getProfitAndLoss(t.invested, t.openedAt, btcExchangeRate);
-        return new PortfolioTransaction(+unit.toFixed(6), t.invested, t.openedAt, t.openDate, +profitAndLoss.toFixed(2));
+        return new PortfolioTransaction(t.id, +unit.toFixed(6), t.invested, t.openedAt, t.openDate, +profitAndLoss.toFixed(2));
       });
   }
 

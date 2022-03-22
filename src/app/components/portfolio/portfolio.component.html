@@ -23,7 +23,7 @@
         <div class="example-element-detail"
              [@detailExpand]="element['openDate'] === expandedElement?.openDate ? 'expanded' : 'collapsed'">
           <span class="spacer"></span>
-          <button mat-stroked-button color="warn" type="button" class="sell-button">Vendre</button>
+          <button mat-stroked-button color="warn" type="button" class="sell-button" (click)="sell(element.id)">Vendre</button>
         </div>
       </td>
     </ng-container>

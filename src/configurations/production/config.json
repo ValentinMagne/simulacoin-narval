@@ -2,5 +2,6 @@
   "authUrl": "//simulacoin-sierra.herokuapp.com/authenticate",
   "buyUrl": "//simulacoin-sierra.herokuapp.com/buy",
   "bitcoinUrl": "https://api.coindesk.com/v1/bpi/currentprice.json",
+  "sellUrl": "//simulacoin-sierra.herokuapp.com/sell",
   "userUrl": "//simulacoin-sierra.herokuapp.com/user"
 }

@@ -34,4 +34,8 @@ export class PortfolioComponent implements OnInit, OnDestroy {
     this.portfolioStore.leave();
   }
 
+  public sell(transactionId: number): void {
+    this.portfolioStore.sell(transactionId);
+  }
+
 }

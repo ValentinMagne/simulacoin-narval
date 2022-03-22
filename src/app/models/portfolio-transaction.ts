@@ -1,16 +1,26 @@
 export class PortfolioTransaction {
+  private _id: number;
   private _unit: number;
   private _invested: number;
   private _openedAt: number;
   private _openDate: Date;
   private _profitAndLoss: number;
 
-  constructor(unit: number, invested: number, openedAt: number, openDate: Date, profitAndLoss: number) {
+  constructor(id: number, unit: number, invested: number, openedAt: number, openDate: Date, profitAndLoss: number) {
+    this._id = id;
     this._unit = unit;
     this._invested = invested;
     this._openedAt = openedAt;
     this._openDate = openDate;
     this._profitAndLoss = profitAndLoss;
+  }
+
+  get id(): number {
+    return this._id;
+  }
+
+  set id(value: number) {
+    this._id = value;
   }
 
   get unit(): number {

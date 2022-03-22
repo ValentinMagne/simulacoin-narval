@@ -2,5 +2,6 @@
   "authUrl": "//localhost:8080/authenticate",
   "buyUrl": "//localhost:8080/buy",
   "bitcoinUrl": "https://api.coindesk.com/v1/bpi/currentprice.json",
+  "sellUrl": "//localhost:8080/sell",
   "userUrl": "//localhost:8080/user"
 }
