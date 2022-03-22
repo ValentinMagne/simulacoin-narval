@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { map, mergeMap } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
-import { AuthBusiness } from '../business/auth/auth.business';
+import { AuthBusiness } from '../business/auth.business';
 import { Config } from '../config/config';
 import { ConfigStoreService } from '../stores/config-store.service';
-import { User } from "../models/user";
+import { UserBusiness } from "../business/user.business";
 import { UserService } from "./user.service";
 
 @Injectable({providedIn: 'root'})
@@ -39,7 +39,7 @@ export class AuthService {
     localStorage.removeItem(AuthService.USERNAME_KEY);
   }
 
-  public tryLogin(): Observable<User> {
+  public tryLogin(): Observable<UserBusiness> {
     if (AuthService.isLogged()) {
       return this.loginService.getUser(AuthService.getUserName());
     } else {

@@ -1,4 +1,4 @@
-export interface Bitcoin {
+export interface BitcoinBusiness {
   bpi: {
     USD: BPI
   }

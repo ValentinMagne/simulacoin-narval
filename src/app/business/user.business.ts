@@ -1,6 +1,6 @@
 import { TransactionTypeNum } from "../enums/transaction-type.num";
 
-export interface User {
+export interface UserBusiness {
   username: string;
   purse: Purse;
 }

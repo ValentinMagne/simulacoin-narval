@@ -5,7 +5,7 @@ import { startWith, switchMap } from "rxjs/operators";
 import { BitcoinService } from "../services/bitcoin.service";
 import { PortfolioHistoric } from "../models/portfolio-historic";
 import { PortfolioTransaction } from "../models/portfolio-transaction";
-import { Transaction, User } from "../models/user";
+import { Transaction, UserBusiness } from "../business/user.business";
 import { UserService } from "../services/user.service";
 
 @Injectable({providedIn: 'root'})
@@ -28,11 +28,11 @@ export class PortfolioStoreService {
       startWith(0),
       switchMap(() => this.bitcoinService.getBitcoin())
     ).subscribe((btcExchangeRate: number) => {
-      this.userService.currentUser$.subscribe((user: User) => {
+      this.userService.currentUser$.subscribe((user: UserBusiness) => {
         this._transactions$.next(PortfolioStoreService.getProcessedTransactions(user, btcExchangeRate));
       })
     });
-    this.userService.currentUser$.subscribe((user: User) => {
+    this.userService.currentUser$.subscribe((user: UserBusiness) => {
       const closedTransactions: Transaction[] = user.purse.transactions.filter((t: Transaction) => !t.opened);
       const totalInvested = closedTransactions.reduce((totalInvested: number, t: Transaction) => totalInvested + t.invested, 0);
       const profitAndLoss = closedTransactions.reduce((totalProfitAndLoss: number, t: Transaction) => {
@@ -67,7 +67,7 @@ export class PortfolioStoreService {
   //  PRIVATE
   //////////////////////
 
-  private static getProcessedTransactions(user: User, btcExchangeRate: number): PortfolioTransaction[] {
+  private static getProcessedTransactions(user: UserBusiness, btcExchangeRate: number): PortfolioTransaction[] {
     return user.purse.transactions
       .filter((t: Transaction) => t.opened)
       .map((t: Transaction) => {
