@@ -21,7 +21,7 @@ export class ProfitAndLossDirective implements OnChanges {
     }
     if (this.value > 0) {
       this.className = 'profit';
-    } else {
+    } else if (this.value < 0) {
       this.className = 'loss';
     }
     this.hostElement.nativeElement.innerText = this.currencyPipe.transform(this.value);
