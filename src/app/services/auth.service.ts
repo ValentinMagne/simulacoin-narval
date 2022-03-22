@@ -13,7 +13,6 @@ import { UserService } from "./user.service";
 export class AuthService {
 
   private static readonly TOKEN_KEY = 'id_token';
-  private static readonly USERNAME_KEY = 'username';
 
   constructor(private readonly configStore: ConfigStoreService,
               private readonly http: HttpClient,
@@ -27,7 +26,7 @@ export class AuthService {
         return this.http.post<AuthBusiness>(config.authUrl, {username, password})
           .pipe(
             map((authResult: any) => {
-              AuthService.setSession(authResult, username);
+              AuthService.setSession(authResult);
             })
           );
       })
@@ -36,28 +35,21 @@ export class AuthService {
 
   public logout(): void {
     localStorage.removeItem(AuthService.TOKEN_KEY);
-    localStorage.removeItem(AuthService.USERNAME_KEY);
   }
 
   public tryLogin(): Observable<UserBusiness> {
     if (AuthService.isLogged()) {
-      return this.loginService.getUser(AuthService.getUserName());
+      return this.loginService.getUser();
     } else {
       return throwError(new Error("no credentials"));
     }
   }
 
-  private static getUserName(): string | null {
-    return localStorage.getItem(AuthService.USERNAME_KEY);
-  }
-
   private static isLogged(): boolean {
-    return localStorage.getItem(AuthService.TOKEN_KEY) !== null
-      && localStorage.getItem(AuthService.USERNAME_KEY) !== null;
+    return localStorage.getItem(AuthService.TOKEN_KEY) !== null;
   }
 
-  private static setSession(authResult: AuthBusiness, username: string): void {
+  private static setSession(authResult: AuthBusiness): void {
     localStorage.setItem(AuthService.TOKEN_KEY, authResult.token);
-    localStorage.setItem(AuthService.USERNAME_KEY, username);
   }
 }

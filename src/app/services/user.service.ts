@@ -18,10 +18,10 @@ export class UserService {
               private readonly http: HttpClient) {
   }
 
-  public getUser(username: string | null): Observable<UserBusiness> {
+  public getUser(): Observable<UserBusiness> {
     return this.configStore.config$.pipe(
       mergeMap((config: Config) => {
-        return this.http.get<UserBusiness>(`${config.userUrl}?username=${username}`).pipe(
+        return this.http.get<UserBusiness>(`${config.userUrl}`).pipe(
           map((user: UserBusiness) => {
             this._currentUser$.next(user);
             return user;
@@ -59,5 +59,9 @@ export class UserService {
 
   public get currentUser$(): Observable<UserBusiness> {
     return this._currentUser$.asObservable();
+  }
+
+  public setCurrentUser$(user: UserBusiness): void {
+    this._currentUser$.next(user);
   }
 }

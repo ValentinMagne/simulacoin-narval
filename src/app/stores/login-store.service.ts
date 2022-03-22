@@ -1,4 +1,4 @@
-import { BehaviorSubject, Observable, throwError } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from "@angular/material/snack-bar";
@@ -7,7 +7,6 @@ import { Router } from "@angular/router";
 import { AuthService } from "../services/auth.service";
 import { RouteEnum } from "../enums/route.enum";
 import { UserService } from "../services/user.service";
-import { HttpErrorResponse } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +34,7 @@ export class LoginStoreService {
     this._showSpinner$.next(true);
     this.snackBar.dismiss();
     this.authService.login(username, password).subscribe(() => { // TODO use pipe
-      this.userService.getUser(username).subscribe(() => {
+      this.userService.getUser().subscribe(() => {
         this.router.navigate([RouteEnum.HOME]);
       }, (err) => {
         // TODO use interceptor ?

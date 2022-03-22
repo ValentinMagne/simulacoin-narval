@@ -6,7 +6,6 @@ import { AuthService } from '../services/auth.service';
 import { ConfigStoreService } from './config-store.service';
 import { RouteEnum } from "../enums/route.enum";
 import { UserService } from "../services/user.service";
-import { HttpErrorResponse } from "@angular/common/http";
 
 @Injectable({providedIn: 'root'})
 export class AppRootStoreService {
