@@ -31,37 +31,7 @@ export class UserService {
     );
   }
 
-  public buy(quantity: number): Observable<UserBusiness> {
-    return this.configStore.config$.pipe(
-      mergeMap((config: Config) => {
-        return this.http.put<UserBusiness>(`${config.buyUrl}?price=${quantity}`, {}).pipe(
-          map((user: UserBusiness) => {
-            this._currentUser$.next(user);
-            return user;
-          })
-        );
-      }), catchError((err) => throwError(err))
-    );
-  }
-
-  public sell(transactionId: number): Observable<UserBusiness> {
-    return this.configStore.config$.pipe(
-      mergeMap((config: Config) => {
-        return this.http.put<UserBusiness>(`${config.sellUrl}?transactionId=${transactionId}`, {}).pipe(
-          map((user: UserBusiness) => {
-            this._currentUser$.next(user);
-            return user;
-          })
-        );
-      }), catchError((err) => throwError(err))
-    );
-  }
-
   public get currentUser$(): Observable<UserBusiness> {
     return this._currentUser$.asObservable();
-  }
-
-  public setCurrentUser$(user: UserBusiness): void {
-    this._currentUser$.next(user);
   }
 }

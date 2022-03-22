@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { interval, Observable, ReplaySubject, Subscription } from "rxjs";
+import { Router } from "@angular/router";
 import { startWith, switchMap } from "rxjs/operators";
 
 import { BitcoinService } from "../services/bitcoin.service";
 import { PortfolioHistoric } from "../models/portfolio-historic";
 import { PortfolioTransaction } from "../models/portfolio-transaction";
+import { RouteEnum } from "../enums/route.enum";
 import { Transaction, UserBusiness } from "../business/user.business";
 import { UserService } from "../services/user.service";
 
@@ -15,7 +17,9 @@ export class PortfolioStoreService {
   private _historic$: ReplaySubject<PortfolioHistoric> = new ReplaySubject<PortfolioHistoric>(1);
   private subscription: Subscription | undefined;
 
-  constructor(private readonly bitcoinService: BitcoinService, private readonly userService: UserService) {
+  constructor(private readonly bitcoinService: BitcoinService,
+              private readonly router: Router,
+              private readonly userService: UserService) {
   }
 
   //////////////////////
@@ -48,7 +52,12 @@ export class PortfolioStoreService {
   }
 
   public sell(transactionId: number) {
-    this.userService.sell(transactionId).subscribe();
+    this.bitcoinService.sell(transactionId)
+      .pipe(
+        switchMap(_ => this.userService.getUser())
+      )
+      .subscribe(_ => {
+      }, _ => this.router.navigate([RouteEnum.ERROR]));
   }
 
   //////////////////////

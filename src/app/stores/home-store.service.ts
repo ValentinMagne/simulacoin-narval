@@ -44,10 +44,8 @@ export class HomeStoreService {
       data: {price: 50},
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== undefined) {
-          this.userService.buy(result).subscribe();
-      }
+    dialogRef.afterClosed().subscribe(quantity => {
+      this.onDialogClosed(quantity);
     });
   }
 
@@ -57,5 +55,20 @@ export class HomeStoreService {
 
   get bitcoin$(): Observable<number> {
     return this._bitcoin$.asObservable();
+  }
+
+  //////////////////////
+  //  PRIVATE
+  //////////////////////
+
+  private onDialogClosed(quantity: number | undefined): void {
+    if (quantity !== undefined) {
+      this.bitcoinService.buy(quantity)
+        .pipe(
+          switchMap(_ => this.userService.getUser())
+        )
+        .subscribe(_ => {
+        }, _ => this.router.navigate([RouteEnum.ERROR]));
+    }
   }
 }
