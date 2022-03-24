@@ -38,11 +38,10 @@ export class PortfolioStoreService {
     });
     this.userService.currentUser$.subscribe((user: UserBusiness) => {
       const closedTransactions: Transaction[] = user.purse.transactions.filter((t: Transaction) => !t.opened);
-      const totalInvested = closedTransactions.reduce((totalInvested: number, t: Transaction) => totalInvested + t.invested, 0);
       const profitAndLoss = closedTransactions.reduce((totalProfitAndLoss: number, t: Transaction) => {
         return totalProfitAndLoss + PortfolioStoreService.getProfitAndLoss(t.invested, t.openedAt, t.closedAt);
       }, 0);
-      const historic: PortfolioHistoric = new PortfolioHistoric(totalInvested, profitAndLoss);
+      const historic: PortfolioHistoric = new PortfolioHistoric(profitAndLoss);
       this._historic$.next(historic);
     });
   }

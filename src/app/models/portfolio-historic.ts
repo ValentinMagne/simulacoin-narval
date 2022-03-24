@@ -1,18 +1,8 @@
 export class PortfolioHistoric {
-  private _invested: number;
   private _profitAndLoss: number;
 
-  constructor(invested: number, profitAndLoss: number) {
-    this._invested = invested;
+  constructor(profitAndLoss: number) {
     this._profitAndLoss = profitAndLoss;
-  }
-
-  get invested(): number {
-    return this._invested;
-  }
-
-  set invested(value: number) {
-    this._invested = value;
   }
 
   get profitAndLoss(): number {

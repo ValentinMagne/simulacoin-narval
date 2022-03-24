@@ -35,22 +35,6 @@ tr.example-element-row:not(.example-expanded-row):active {
   flex: 1 1 auto;
 }
 
-.historic-container {
-  display: flex;
-}
-
-.historic-item {
-  width: 100%;
-}
-
-.historic-item:first-child {
-  margin-right: 1rem;
-}
-
-.historic-item:last-child {
-  margin-left: 1rem;
-}
-
 .profit {
   color: green;
 }
