@@ -31,7 +31,7 @@ export class BitcoinService {
   public buy(quantity: number): Observable<void> {
     return this.configStore.config$.pipe(
       mergeMap((config: Config) => {
-        return this.http.put<void>(`${config.buyUrl}?price=${quantity}`, {});
+        return this.http.put<void>(`${config.buyUrl}?quantity=${quantity}`, {});
       })
     );
   }
