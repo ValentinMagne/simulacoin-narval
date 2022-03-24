@@ -41,7 +41,7 @@ export class HomeStoreService {
 
   public openBuyDialog(): void {
     const dialogRef = this.dialog.open(BuyDialogComponent, {
-      data: {quantity: 50} as BuyDialogData,
+      data: {} as BuyDialogData,
     });
 
     dialogRef.afterClosed().subscribe(quantity => {
@@ -53,7 +53,7 @@ export class HomeStoreService {
   //  QUERIES
   //////////////////////
 
-  get bitcoin$(): Observable<number> {
+  public get bitcoin$(): Observable<number> {
     return this._bitcoin$.asObservable();
   }
 
