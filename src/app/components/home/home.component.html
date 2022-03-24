@@ -4,7 +4,7 @@
     <mat-card class="mat-elevation-z8">
       <mat-card-title><span>BTC</span></mat-card-title>
       <mat-card-subtitle>Bitcoin</mat-card-subtitle>
-      <mat-card-content>$ {{bitcoin$ | async}}</mat-card-content>
+      <mat-card-content>{{bitcoin$ | async | currency}}</mat-card-content>
       <mat-divider inset></mat-divider>
       <mat-card-actions align="end">
         <button mat-raised-button color="accent" type="button" (click)="openBuyDialog()">Acheter</button>
@@ -15,7 +15,7 @@
   <p>
     <mat-card class="mat-elevation-z8">
       <mat-card-title>
-        <span>$ {{user.purse.balance}}</span>
+        <span>{{user.purse.balance | currency}}</span>
       </mat-card-title>
     </mat-card>
   </p>
