@@ -18,14 +18,21 @@ export class MenuStoreService {
 
   public logout(): void {
     this.authService.logout();
-    this.router.navigate([RouteEnum.LOGIN])
   }
 
   public goToHome(): void {
-    this.router.navigate([RouteEnum.HOME])
+    this.navigate(RouteEnum.HOME);
   }
 
   public goToPortfolio(): void {
-    this.router.navigate([RouteEnum.PORTFOLIO])
+    this.navigate(RouteEnum.PORTFOLIO);
+  }
+
+  //////////////////////
+  //  PRIVATE
+  //////////////////////
+
+  private navigate(route: RouteEnum): void {
+    this.router.navigate([route]);
   }
 }

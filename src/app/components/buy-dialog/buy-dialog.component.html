@@ -1,12 +1,11 @@
-<h1 mat-dialog-title>Hi {{data.price}}</h1>
+<h1 mat-dialog-title>Acheter BTC</h1>
 <div mat-dialog-content>
-  <p>Combien</p>
+  <p>Montant</p>
   <mat-form-field appearance="fill">
     <mat-label>$</mat-label>
-    <input matInput [(ngModel)]="data.price">
+    <input matInput [(ngModel)]="data.quantity">
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.price" cdkFocusInitial>Ok</button>
+  <button mat-button [mat-dialog-close]="data.quantity" cdkFocusInitial>Ouvrir la position</button>
 </div>

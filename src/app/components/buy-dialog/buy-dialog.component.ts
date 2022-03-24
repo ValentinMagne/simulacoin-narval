@@ -10,13 +10,7 @@ import { BuyDialogData } from "../../models/buy-dialog-data";
 })
 export class BuyDialogComponent {
 
-  constructor(
-    public dialogRef: MatDialogRef<BuyDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: BuyDialogData,
-  ) {}
-
-  public onNoClick(): void {
-    this.dialogRef.close();
+  constructor(@Inject(MAT_DIALOG_DATA) public data: BuyDialogData,
+              private readonly dialogRef: MatDialogRef<BuyDialogComponent>) {
   }
-
 }

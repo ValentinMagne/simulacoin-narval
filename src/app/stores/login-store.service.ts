@@ -33,17 +33,13 @@ export class LoginStoreService {
   public login(username: string, password: string): void {
     this._showSpinner$.next(true);
     this.snackBar.dismiss();
-    this.authService.login(username, password).subscribe(() => { // TODO use pipe
+    this.authService.login(username, password).subscribe(() => {
       this.userService.getUser().subscribe(() => {
         this.router.navigate([RouteEnum.HOME]);
-      }, (err) => {
-        // TODO use interceptor ?
-        console.warn("err on get user");
+      }, () => {
         this.router.navigate([RouteEnum.ERROR]);
-        //throwError(err);
       });
     }, () => {
-      console.warn("top err");
       this._form.reset();
       this._showSpinner$.next(false);
       this.snackBar.open("Identifiant ou mot de passe incorrect", "Fermer");

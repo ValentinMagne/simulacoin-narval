@@ -27,12 +27,16 @@ export class AppRootStoreService {
           this.router.navigate([RouteEnum.LOGIN]);
           throw err;
         })
-      ).subscribe();
+      ).subscribe(() => {
+        if (this.router.url === '/') {
+          this.router.navigate([RouteEnum.HOME]);
+        }
+      });
     });
   }
 
   public leave(): void {
-    this.authService.logout();
+    this.authService.removeSession();
   }
 
 }

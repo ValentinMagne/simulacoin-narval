@@ -6,6 +6,7 @@ import { startWith, switchMap } from "rxjs/operators";
 
 import { BitcoinService } from "../services/bitcoin.service";
 import { BuyDialogComponent } from "../components/buy-dialog/buy-dialog.component";
+import { BuyDialogData } from "../models/buy-dialog-data";
 import { RouteEnum } from "../enums/route.enum";
 import { UserService } from "../services/user.service";
 
@@ -40,8 +41,7 @@ export class HomeStoreService {
 
   public openBuyDialog(): void {
     const dialogRef = this.dialog.open(BuyDialogComponent, {
-      width: '250px',
-      data: {price: 50},
+      data: {quantity: 50} as BuyDialogData,
     });
 
     dialogRef.afterClosed().subscribe(quantity => {

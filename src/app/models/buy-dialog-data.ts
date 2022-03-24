@@ -1,3 +1,3 @@
 export interface BuyDialogData {
-  price: number;
+  quantity: number;
 }
