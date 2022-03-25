@@ -24,6 +24,6 @@ export class LoginComponent implements OnDestroy {
   }
 
   loginWithTestAccount() {
-    this.loginStore.login("simulacoin", "azerty");
+    this.loginStore.login("test", "test");
   }
 }

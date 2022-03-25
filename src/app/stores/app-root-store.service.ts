@@ -28,7 +28,7 @@ export class AppRootStoreService {
           throw err;
         })
       ).subscribe(() => {
-        if (this.router.url === '/') {
+        if (this.router.url === '/' || this.router.url === '/error') {
           this.router.navigate([RouteEnum.HOME]);
         }
       });
