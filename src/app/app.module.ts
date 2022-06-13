@@ -8,25 +8,22 @@ import { NgModule } from '@angular/core';
 import { AppRootComponent } from './components/app-root/app-root.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { BuyDialogComponent } from './components/buy-dialog/buy-dialog.component';
 import { ErrorComponent } from './components/error/error.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { MaterialModule } from "./modules/material.module";
 import { MenuComponent } from './components/menu/menu.component';
-import { PortfolioComponent } from './components/portfolio/portfolio.component';
-import { ProfitAndLossDirective } from './directives/profit-and-loss.directive';
-import { BuyDialogComponent } from './components/buy-dialog/buy-dialog.component';
+import { SharedModule } from "./modules/shared.module";
 
 @NgModule({
   declarations: [
     AppRootComponent,
+    BuyDialogComponent,
     ErrorComponent,
     HomeComponent,
     LoginComponent,
-    MenuComponent,
-    PortfolioComponent,
-    ProfitAndLossDirective,
-    BuyDialogComponent
+    MenuComponent
   ],
   imports: [
     AppRoutingModule,
@@ -34,8 +31,9 @@ import { BuyDialogComponent } from './components/buy-dialog/buy-dialog.component
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    MaterialModule,
     ReactiveFormsModule,
-    MaterialModule
+    SharedModule
   ],
   providers: [
     CurrencyPipe,

@@ -38,13 +38,13 @@
   </table>
   <ng-container *ngIf="(historic$ | async) as historic">
     <h1>Historique</h1>
-      <mat-card class="mat-elevation-z8">
-        <mat-card-title>
-          <span>Gains / Pertes</span>
-        </mat-card-title>
-        <mat-card-content>
-          <span appProfitAndLoss [value]="historic.profitAndLoss"></span>
-        </mat-card-content>
-      </mat-card>
+    <mat-card class="mat-elevation-z8">
+      <mat-card-title>
+        <span>Gains / Pertes</span>
+      </mat-card-title>
+      <mat-card-content>
+        <span appProfitAndLoss [value]="historic.profitAndLoss"></span>
+      </mat-card-content>
+    </mat-card>
   </ng-container>
 </ng-container>

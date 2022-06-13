@@ -1,8 +1,8 @@
 import { animate, state, style, transition, trigger } from "@angular/animations";
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { PortfolioStoreService } from '../../stores/portfolio-store.service';
-import { PortfolioTransaction } from "../../models/portfolio-transaction";
+import { PortfolioStoreService } from '../stores/portfolio-store.service';
+import { PortfolioTransaction } from "../models/portfolio-transaction";
 
 @Component({
   selector: 'app-portfolio',

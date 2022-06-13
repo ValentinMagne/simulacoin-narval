@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { ErrorComponent } from "./components/error/error.component";
 import { HomeComponent } from "./components/home/home.component";
 import { LoginComponent } from './components/login/login.component';
-import { PortfolioComponent } from "./components/portfolio/portfolio.component";
 
 const routes: Routes = [
   {
@@ -20,7 +19,7 @@ const routes: Routes = [
       },
       {
         path: 'portfolio',
-        component: PortfolioComponent
+        loadChildren: () => import('./portfolio/portfolio.module').then(m => m.PortfolioModule)
       },
       {
         path: 'error',
