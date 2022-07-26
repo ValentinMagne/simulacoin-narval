@@ -1,12 +1,12 @@
-import { BehaviorSubject, Observable } from "rxjs";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { BehaviorSubject, Observable } from 'rxjs';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { Router } from "@angular/router";
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
-import { AuthService } from "../services/auth.service";
-import { RouteEnum } from "../enums/route.enum";
-import { UserService } from "../services/user.service";
+import { AuthService } from '../../../services/auth.service';
+import { RouteEnum } from '../../../enums/route.enum';
+import { UserService } from '../../../services/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +42,7 @@ export class LoginStoreService {
     }, () => {
       this._form.reset();
       this._showSpinner$.next(false);
-      this.snackBar.open("Identifiant ou mot de passe incorrect", "Fermer");
+      this.snackBar.open('Identifiant ou mot de passe incorrect', 'Fermer');
     });
   }
 

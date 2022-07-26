@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { LoginStoreService } from "../../stores/login-store.service";
+import { LoginStoreService } from "../stores/login-store.service";
 
 @Component({
   selector: 'app-login',

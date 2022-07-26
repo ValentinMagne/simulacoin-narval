@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { HomeRoutingModule } from './features/home/home-routing.module';
-import { LoginComponent } from './components/login/login.component';
 import { ErrorRoutingModule } from './features/error/error-routing.module';
+import { HomeRoutingModule } from './features/home/home-routing.module';
+import { LoginRoutingModule } from './features/login/login-routing.module';
 
 const routes: Routes = [
   {
@@ -15,7 +15,7 @@ const routes: Routes = [
       },
       {
         path: 'login',
-        component: LoginComponent
+        loadChildren: () => LoginRoutingModule,
       },
       {
         path: 'portfolio',
