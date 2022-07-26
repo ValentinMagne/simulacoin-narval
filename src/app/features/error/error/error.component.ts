@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ErrorStoreService } from "../../stores/error-store.service";
+import { ErrorStoreService } from '../stores/error-store.service';
 
 @Component({
   selector: 'app-error',
