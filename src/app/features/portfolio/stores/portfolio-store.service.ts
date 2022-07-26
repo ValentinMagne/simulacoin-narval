@@ -3,12 +3,12 @@ import { interval, Observable, ReplaySubject, Subscription } from "rxjs";
 import { Router } from "@angular/router";
 import { startWith, switchMap } from "rxjs/operators";
 
-import { BitcoinService } from "../../services/bitcoin.service";
+import { BitcoinService } from "../../../services/bitcoin.service";
 import { PortfolioHistoric } from "../models/portfolio-historic";
 import { PortfolioTransaction } from "../models/portfolio-transaction";
-import { RouteEnum } from "../../enums/route.enum";
-import { Transaction, UserBusiness } from "../../business/user.business";
-import { UserService } from "../../services/user.service";
+import { RouteEnum } from "../../../enums/route.enum";
+import { Transaction, UserBusiness } from "../../../business/user.business";
+import { UserService } from "../../../services/user.service";
 
 @Injectable({providedIn: 'root'})
 export class PortfolioStoreService {
