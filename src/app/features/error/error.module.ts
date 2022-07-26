@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { ErrorComponent } from './error/error.component';
 import { ErrorRoutingModule } from './error-routing.module';
-import { MaterialModule } from '../../modules/material.module';
+import { MaterialModule } from '../../common/modules/material.module';
 
 @NgModule({
   declarations: [

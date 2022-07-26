@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 
-import { BuyDialogData } from "../../../models/buy-dialog-data";
+import { BuyDialogData } from "../models/buy-dialog-data";
 
 @Component({
   selector: 'app-buy-dialog',

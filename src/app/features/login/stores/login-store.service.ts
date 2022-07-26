@@ -4,9 +4,9 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
-import { AuthService } from '../../../services/auth.service';
-import { RouteEnum } from '../../../enums/route.enum';
-import { UserService } from '../../../services/user.service';
+import { AuthService } from '../../../common/services/auth.service';
+import { RouteEnum } from '../../../common/enums/route.enum';
+import { UserService } from '../../../common/services/user.service';
 
 @Injectable({
   providedIn: 'root'

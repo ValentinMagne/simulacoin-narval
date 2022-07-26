@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { BuyDialogComponent } from "./buy-dialog/buy-dialog.component";
 import { HomeComponent } from './home/home.component';
-import { MaterialModule } from '../../modules/material.module';
+import { MaterialModule } from '../../common/modules/material.module';
 import { ReactiveFormsModule } from "@angular/forms";
-import { SharedModule } from '../../modules/shared.module';
+import { SharedModule } from '../../common/modules/shared.module';
 
 @NgModule({
   declarations: [

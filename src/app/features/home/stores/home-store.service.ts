@@ -4,11 +4,11 @@ import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
 import { startWith, switchMap } from "rxjs/operators";
 
-import { BitcoinService } from "../../../services/bitcoin.service";
+import { BitcoinService } from "../../../common/services/bitcoin.service";
 import { BuyDialogComponent } from "../buy-dialog/buy-dialog.component";
-import { BuyDialogData } from "../../../models/buy-dialog-data";
-import { RouteEnum } from "../../../enums/route.enum";
-import { UserService } from "../../../services/user.service";
+import { BuyDialogData } from "../models/buy-dialog-data";
+import { RouteEnum } from "../../../common/enums/route.enum";
+import { UserService } from "../../../common/services/user.service";
 
 @Injectable({providedIn: 'root'})
 export class HomeStoreService {
