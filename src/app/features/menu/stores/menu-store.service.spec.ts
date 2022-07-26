@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MenuStoreService } from '../menu-store.service';
+import { MenuStoreService } from './menu-store.service';
 
 describe('MenuStoreService', () => {
   let service: MenuStoreService;

@@ -12,14 +12,13 @@ import { ErrorModule } from "./features/error/error.module";
 import { HomeModule } from "./features/home/home.module";
 import { LoginComponent } from './components/login/login.component';
 import { MaterialModule } from "./modules/material.module";
-import { MenuComponent } from './components/menu/menu.component';
+import { MenuModule } from "./features/menu/menu.module";
 import { SharedModule } from "./modules/shared.module";
 
 @NgModule({
   declarations: [
     AppRootComponent,
     LoginComponent,
-    MenuComponent
   ],
   imports: [
     AppRoutingModule,
@@ -30,6 +29,7 @@ import { SharedModule } from "./modules/shared.module";
     HomeModule,
     HttpClientModule,
     MaterialModule,
+    MenuModule,
     ReactiveFormsModule,
     SharedModule
   ],
