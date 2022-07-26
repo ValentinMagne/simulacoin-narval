@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 
-import { BuyDialogData } from "../../models/buy-dialog-data";
+import { BuyDialogData } from "../../../models/buy-dialog-data";
 
 @Component({
   selector: 'app-buy-dialog',
@@ -13,8 +13,7 @@ export class BuyDialogComponent {
 
   public form: FormGroup;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: BuyDialogData,
-              private readonly dialogRef: MatDialogRef<BuyDialogComponent>) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: BuyDialogData) {
     this.form = new FormGroup({
       quantity: new FormControl(data.quantity, [Validators.required]),
     });
