@@ -5,7 +5,7 @@ import { Observable, ReplaySubject, throwError } from 'rxjs';
 
 import { Config } from '../config/config';
 import { ConfigStoreService } from '../stores/config-store.service';
-import { UserBusiness } from "../business/user.business";
+import { UserBusiness } from '../business/user.business';
 
 @Injectable({
   providedIn: 'root'

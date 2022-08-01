@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngxs/store';
 
-import { AuthService } from '../../../common/services/auth.service';
+import { Logout } from '../../auth/logout';
 import { RouteEnum } from '../../../common/enums/route.enum';
 
 @Injectable({
@@ -9,7 +10,8 @@ import { RouteEnum } from '../../../common/enums/route.enum';
 })
 export class MenuStoreService {
 
-  constructor(private readonly authService: AuthService, private readonly router: Router) {
+  constructor(private readonly router: Router,
+              private readonly store: Store) {
   }
 
   //////////////////////
@@ -17,7 +19,7 @@ export class MenuStoreService {
   //////////////////////
 
   public logout(): void {
-    this.authService.logout();
+    this.store.dispatch(Logout);
   }
 
   public goToHome(): void {

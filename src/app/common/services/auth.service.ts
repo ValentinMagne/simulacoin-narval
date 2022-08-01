@@ -1,63 +1,69 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, mergeMap } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
-import { Router } from "@angular/router";
+import { map, switchMap } from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
+import { Select } from '@ngxs/store';
 
 import { AuthBusiness } from '../business/auth.business';
+import { AuthState } from '../../features/auth/auth-state';
 import { Config } from '../config/config';
-import { ConfigStoreService } from '../stores/config-store.service';
-import { UserBusiness } from "../business/user.business";
-import { UserService } from "./user.service";
-import { RouteEnum } from "../enums/route.enum";
+import { ConfigService } from '../config/config.service';
+import { UserBusiness } from '../business/user.business';
+import { UserService } from './user.service';
+
+export const TOKEN_KEY = 'simulacoin_token';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
 
-  public static readonly TOKEN_KEY = 'simulacoin_token';
+  @Select(AuthState.token) token$!: Observable<string | null>;
 
-  constructor(private readonly configStore: ConfigStoreService,
+  constructor(private readonly configService: ConfigService,
               private readonly http: HttpClient,
-              private readonly loginService: UserService,
-              private readonly router: Router) {
+              private readonly loginService: UserService) {
   }
 
-  public login(username: string, password: string): Observable<void> {
+  public login(username: string, password: string): Observable<string> {
     this.removeSession();
-    return this.configStore.config$.pipe(
-      mergeMap((config: Config) => {
+    return this.configService.getConfig().pipe(
+      switchMap((config: Config) => {
         return this.http.post<AuthBusiness>(config.authUrl, {username, password})
           .pipe(
             map((authResult: any) => {
               AuthService.setSession(authResult);
+              return authResult;
             })
           );
       })
     )
   }
 
-  public logout(): void {
+  public logout(): Observable<boolean> {
     this.removeSession();
-    this.router.navigate([RouteEnum.LOGIN]);
+    return of(true);
   }
 
   public removeSession(): void {
-    localStorage.removeItem(AuthService.TOKEN_KEY);
+    localStorage.removeItem(TOKEN_KEY);
   }
 
   public tryLogin(): Observable<UserBusiness> {
-    if (AuthService.isLogged()) {
-      return this.loginService.getUser();
-    } else {
-      return throwError(new Error("no credentials"));
-    }
+    return this.token$?.pipe(
+      switchMap((token: string | null) => {
+        if (token || AuthService.isLogged()) {
+          return this.loginService.getUser();
+        } else {
+          return throwError(new Error('no credentials'));
+        }
+      })
+    );
   }
 
   private static isLogged(): boolean {
-    return localStorage.getItem(AuthService.TOKEN_KEY) !== null;
+    return localStorage.getItem(TOKEN_KEY) !== null;
   }
 
   private static setSession(authResult: AuthBusiness): void {
-    localStorage.setItem(AuthService.TOKEN_KEY, authResult.token);
+    localStorage.setItem(TOKEN_KEY, authResult.token);
   }
 }
