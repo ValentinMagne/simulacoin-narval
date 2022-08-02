@@ -15,11 +15,6 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: '**',
-        redirectTo: 'login',
-        pathMatch: 'full'
-      },
-      {
         path: 'home',
         loadChildren: () => HomeRoutingModule,
       },
@@ -33,6 +28,10 @@ const routes: Routes = [
       },
       {
         path: 'error',
+        loadChildren: () => ErrorRoutingModule,
+      },
+      {
+        path: '**',
         loadChildren: () => ErrorRoutingModule,
       }
     ]
