@@ -1,4 +1,4 @@
-import { Actions, Store } from '@ngxs/store';
+import { Store } from '@ngxs/store';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
@@ -9,7 +9,6 @@ import { AuthService } from '../../../common/services/auth.service';
 import { FetchUser } from "../../../common/user/fetch-user";
 import { Login } from '../../auth/login';
 import { RouteEnum } from '../../../common/enums/route.enum';
-import { UserService } from '../../../common/services/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +18,8 @@ export class LoginStoreService {
   private _showSpinner$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private readonly _form: FormGroup;
 
-  constructor(private readonly actions$: Actions,
-              private readonly authService: AuthService,
+  constructor(private readonly authService: AuthService,
               private readonly snackBar: MatSnackBar,
-              private readonly userService: UserService,
               private readonly router: Router,
               private readonly store: Store) {
     this._form = new FormGroup({
