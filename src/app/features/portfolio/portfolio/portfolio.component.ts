@@ -1,8 +1,12 @@
 import { animate, state, style, transition, trigger } from "@angular/animations";
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable } from "rxjs";
+import { Select } from "@ngxs/store";
 
+import { PortfolioHistoric } from "../models/portfolio-historic";
 import { PortfolioStoreService } from '../stores/portfolio-store.service';
 import { PortfolioTransaction } from "../models/portfolio-transaction";
+import { UserState } from "../../../common/user/user-state";
 
 @Component({
   selector: 'app-portfolio',
@@ -18,8 +22,8 @@ import { PortfolioTransaction } from "../models/portfolio-transaction";
 })
 export class PortfolioComponent implements OnInit, OnDestroy {
 
-  public transactions$ = this.portfolioStore.transactions$;
-  public historic$ = this.portfolioStore.historic$;
+  @Select(UserState.openedTransactions) openedTransactions$!: Observable<PortfolioTransaction[] | undefined>;
+  @Select(UserState.historic) historic$!: Observable<PortfolioHistoric>;
   public displayedColumns = ['invested', 'openedAt', 'unit', 'profitAndLoss'];
   public expandedElement: PortfolioTransaction | undefined;
 

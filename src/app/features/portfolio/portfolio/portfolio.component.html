@@ -1,4 +1,4 @@
-<ng-container *ngIf="(transactions$ | async) as transactions">
+<ng-container *ngIf="(openedTransactions$ | async) as transactions">
   <h1>Portefeuille</h1>
   <table mat-table multiTemplateDataRows [dataSource]="transactions" class="mat-elevation-z8 portfolio-table">
     <ng-container matColumnDef="{{displayedColumns[0]}}">

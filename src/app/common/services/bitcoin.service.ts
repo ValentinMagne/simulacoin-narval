@@ -1,7 +1,6 @@
 import { HttpClient, HttpContext, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Select } from '@ngxs/store';
-import { mergeMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { BitcoinBusiness } from '../business/bitcoin.business';
@@ -35,11 +34,8 @@ export class BitcoinService {
     return this.http.put<UserBusiness>(`${buyUrl}?quantity=${quantity}`, {});
   }
 
-  public sell(transactionId: number): Observable<void> {
-    return this.configStore.config$.pipe(
-      mergeMap((config: Config) => {
-        return this.http.put<void>(`${config.sellUrl}?transactionId=${transactionId}`, {});
-      })
-    );
+  public sell(transactionId: number): Observable<UserBusiness> {
+    const sellUrl: string = this.configService.getConfigSnapshot().sellUrl;
+    return this.http.put<UserBusiness>(`${sellUrl}?transactionId=${transactionId}`, {});
   }
 }

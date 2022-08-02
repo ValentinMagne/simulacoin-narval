@@ -10,6 +10,16 @@ const routes: Routes = [
     path: '',
     children: [
       {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
+      },
+      {
+        path: '**',
+        redirectTo: 'login',
+        pathMatch: 'full'
+      },
+      {
         path: 'home',
         loadChildren: () => HomeRoutingModule,
       },

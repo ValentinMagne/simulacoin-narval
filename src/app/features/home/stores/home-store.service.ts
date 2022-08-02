@@ -13,7 +13,6 @@ import { Config } from "../../../common/config/config";
 import { ConfigService } from "../../../common/config/config.service";
 import { ConfigState } from "../../../common/config/config-state";
 import { FetchBitcoin } from "../../../common/bitcoin/fetch-bitcoin";
-import { FetchUser } from "../../../common/user/fetch-user";
 
 @Injectable({providedIn: 'root'})
 export class HomeStoreService {
@@ -33,7 +32,6 @@ export class HomeStoreService {
   //////////////////////
 
   public enter(): void {
-    this.store.dispatch(FetchUser);
     const refreshRateInSeconds = 20;
     this.fetchBitcoinSubscription = interval(refreshRateInSeconds * 1000).pipe(
       startWith(0),
