@@ -1,11 +1,13 @@
-import { Store } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { take } from "rxjs/operators";
 
 import { AuthService } from '../../../common/services/auth.service';
+import { AuthState } from "../../auth/auth-state";
 import { FetchUser } from "../../../common/user/fetch-user";
 import { Login } from '../../auth/login';
 import { RouteEnum } from '../../../common/enums/route.enum';
@@ -15,6 +17,7 @@ import { RouteEnum } from '../../../common/enums/route.enum';
 })
 export class LoginStoreService {
 
+  @Select(AuthState.isAuthenticated) isAuthenticated$!: Observable<boolean>;
   private _showSpinner$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private readonly _form: FormGroup;
 
@@ -31,6 +34,16 @@ export class LoginStoreService {
   //////////////////////
   //  COMMANDS
   //////////////////////
+
+  public enter(): void {
+    this.isAuthenticated$.pipe(
+      take(1)
+    ).subscribe((isAuthenticated: boolean) => {
+      if (isAuthenticated) {
+        this.router.navigate([RouteEnum.HOME]);
+      }
+    })
+  }
 
   public login(username: string, password: string): void {
     this._showSpinner$.next(true);

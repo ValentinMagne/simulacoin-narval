@@ -7,7 +7,6 @@ import { BitcoinBusiness } from '../business/bitcoin.business';
 import { Config } from '../config/config';
 import { ConfigService } from '../config/config.service';
 import { ConfigState } from '../config/config-state';
-import { ConfigStoreService } from '../stores/config-store.service';
 import { SKIP_AUTH_BEARER } from '../interceptors/auth.interceptor';
 import { UserBusiness } from "../business/user.business";
 
@@ -17,7 +16,6 @@ export class BitcoinService {
   @Select(ConfigState.config) config$!: Observable<Config>;
 
   constructor(private readonly configService: ConfigService,
-              private readonly configStore: ConfigStoreService,
               private readonly http: HttpClient) {
   }
 
