@@ -17,7 +17,7 @@ import { AuthState } from '../../auth/auth-state';
 })
 export class LoginStoreService {
 
-  @Select(AuthState.isAuthenticated) isAuthenticated$!: Observable<boolean | null>;
+  @Select(AuthState.isAuthenticated) isAuthenticated$!: Observable<boolean>;
   private _showSpinner$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private readonly _form: FormGroup;
 
@@ -43,14 +43,14 @@ export class LoginStoreService {
     this.store
       .dispatch(new Login({username, password}))
       .pipe(withLatestFrom(this.isAuthenticated$))
-      .subscribe(([_, isAuthenticated]: [any, boolean | null]) => {
-        if (isAuthenticated) {
+      .subscribe(([_, isAuthenticated]: [any, boolean]) => {
+        this.router.navigate([RouteEnum.HOME]);
+        /*if (isAuthenticated) {
           this.userService.getUser().subscribe(() => {
-            this.router.navigate([RouteEnum.HOME]);
           }, () => {
             this.router.navigate([RouteEnum.ERROR]);
           });
-        }
+        }*/
       }, () => {
         this._form.reset();
         this._showSpinner$.next(false);

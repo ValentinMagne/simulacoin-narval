@@ -1,5 +1,4 @@
 import { Actions, ofActionDispatched } from '@ngxs/store';
-import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -24,18 +23,6 @@ export class AppRootStoreService {
   //////////////////////
 
   public enter(): void {
-    this.configStore.save().subscribe(() => {
-      this.authService.tryLogin().pipe(
-        catchError((err: Error) => {
-          this.router.navigate([RouteEnum.LOGIN]);
-          throw err;
-        })
-      ).subscribe(() => {
-        if (this.router.url === '/' || this.router.url === '/error') {
-          this.router.navigate([RouteEnum.HOME]);
-        }
-      });
-    });
     this.actions.pipe(ofActionDispatched(Logout)).subscribe(() => {
       this.router.navigate([RouteEnum.LOGIN]);
     });

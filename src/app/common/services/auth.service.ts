@@ -59,7 +59,7 @@ export class AuthService {
     );
   }
 
-  private static isLogged(): boolean {
+  public static isLogged(): boolean {
     return localStorage.getItem(TOKEN_KEY) !== null;
   }
 

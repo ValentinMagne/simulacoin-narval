@@ -1,25 +1,31 @@
 import { Injectable } from '@angular/core';
-import { interval, Observable, ReplaySubject, Subscription } from "rxjs";
+import { interval, Observable, Subscription } from "rxjs";
+import { map, startWith } from "rxjs/operators";
 import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
-import { startWith, switchMap } from "rxjs/operators";
+import { Select, Store } from "@ngxs/store";
 
 import { BitcoinService } from "../../../common/services/bitcoin.service";
+import { BuyBitcoin } from "../../../common/user/buy-bitcoin";
 import { BuyDialogComponent } from "../buy-dialog/buy-dialog.component";
 import { BuyDialogData } from "../models/buy-dialog-data";
-import { RouteEnum } from "../../../common/enums/route.enum";
-import { UserService } from "../../../common/services/user.service";
+import { Config } from "../../../common/config/config";
+import { ConfigService } from "../../../common/config/config.service";
+import { ConfigState } from "../../../common/config/config-state";
+import { FetchBitcoin } from "../../../common/bitcoin/fetch-bitcoin";
+import { FetchUser } from "../../../common/user/fetch-user";
 
 @Injectable({providedIn: 'root'})
 export class HomeStoreService {
 
-  private _bitcoin$: ReplaySubject<number> = new ReplaySubject<number>(1);
-  private subscription: Subscription | undefined;
+  @Select(ConfigState.config) config$!: Observable<Config | null>;
+  private fetchBitcoinSubscription: Subscription | undefined;
 
   constructor(public dialog: MatDialog,
               private readonly bitcoinService: BitcoinService,
+              private readonly configService: ConfigService,
               private readonly router: Router,
-              private readonly userService: UserService) {
+              private readonly store: Store) {
   }
 
   //////////////////////
@@ -27,16 +33,18 @@ export class HomeStoreService {
   //////////////////////
 
   public enter(): void {
-    const refreshRateInSeconds = 60;
-    this.subscription = interval(refreshRateInSeconds * 1000).pipe(
+    this.store.dispatch(FetchUser);
+    const refreshRateInSeconds = 20;
+    this.fetchBitcoinSubscription = interval(refreshRateInSeconds * 1000).pipe(
       startWith(0),
-      switchMap(() => this.bitcoinService.getBitcoin())
-    ).subscribe((btcExchangeRate: number) => this._bitcoin$.next(btcExchangeRate),
-      () => this.router.navigate([RouteEnum.LOGIN]));
+      map(() => {
+        this.store.dispatch(FetchBitcoin);
+      })
+    ).subscribe();
   }
 
   public leave(): void {
-    this.subscription?.unsubscribe();
+    this.fetchBitcoinSubscription?.unsubscribe();
   }
 
   public openBuyDialog(): void {
@@ -50,25 +58,12 @@ export class HomeStoreService {
   }
 
   //////////////////////
-  //  QUERIES
-  //////////////////////
-
-  public get bitcoin$(): Observable<number> {
-    return this._bitcoin$.asObservable();
-  }
-
-  //////////////////////
   //  PRIVATE
   //////////////////////
 
   private onDialogClosed(quantity: number | undefined): void {
     if (quantity !== undefined) {
-      this.bitcoinService.buy(quantity)
-        .pipe(
-          switchMap(_ => this.userService.getUser())
-        )
-        .subscribe(_ => {
-        }, _ => this.router.navigate([RouteEnum.ERROR]));
+      this.store.dispatch(new BuyBitcoin(quantity));
     }
   }
 }

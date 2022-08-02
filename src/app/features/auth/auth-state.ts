@@ -24,7 +24,7 @@ export class AuthState {
 
   @Selector()
   static isAuthenticated(state: AuthStateModel): boolean {
-    return !!state.token;
+    return !!state.token || AuthService.isLogged();
   }
 
   constructor(private readonly authService: AuthService) {

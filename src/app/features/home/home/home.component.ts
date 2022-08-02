@@ -1,7 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable } from "rxjs";
+import { Select } from "@ngxs/store";
 
-import { UserService } from "../../../common/services/user.service";
+import { BitcoinState } from "../../../common/bitcoin/bitcoin-state";
 import { HomeStoreService } from "../stores/home-store.service";
+import { UserBusiness } from "../../../common/business/user.business";
+import { UserState } from "../../../common/user/user-state";
 
 @Component({
   selector: 'app-home',
@@ -9,11 +13,10 @@ import { HomeStoreService } from "../stores/home-store.service";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  public currentUser$ = this.userService.currentUser$;
-  public bitcoin$ = this.homeStore.bitcoin$;
+  @Select(UserState.user) user$!: Observable<UserBusiness | null>;
+  @Select(BitcoinState.bitcoinRate) bitcoinRate$!: Observable<number>;
 
-  constructor(private readonly homeStore: HomeStoreService,
-              private readonly userService: UserService) {
+  constructor(private readonly homeStore: HomeStoreService) {
   }
 
   ngOnInit(): void {
