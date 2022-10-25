@@ -2,7 +2,7 @@ import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { catchError, take, tap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { throwError } from "rxjs";
+import { EMPTY, of, throwError } from "rxjs";
 
 import { BitcoinService } from "../services/bitcoin.service";
 import { BitcoinState } from "../bitcoin/bitcoin-state";
@@ -97,9 +97,13 @@ export class UserState {
           user
         })
       }),
-      catchError((err) => {
+      catchError(() => {
+        // TODO Reproduce bug => block sell url, then check warning :
+        // TODO Navigation triggered outside Angular zone, did you forget to call 'ngZone.run()'?
+        // TODO route is login but component is still portfolio
         this.router.navigate([RouteEnum.LOGIN]);
-        return throwError(err);
+        return EMPTY;
+        //return throwError(err);
       })
     )
   }

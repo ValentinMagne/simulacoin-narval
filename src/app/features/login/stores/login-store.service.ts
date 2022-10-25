@@ -4,7 +4,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { take } from "rxjs/operators";
 
 import { AuthService } from '../../../common/services/auth.service';
 import { AuthState } from "../../auth/auth-state";
@@ -36,13 +35,7 @@ export class LoginStoreService {
   //////////////////////
 
   public enter(): void {
-    this.isAuthenticated$.pipe(
-      take(1)
-    ).subscribe((isAuthenticated: boolean) => {
-      if (isAuthenticated) {
-        this.router.navigate([RouteEnum.HOME]);
-      }
-    })
+    this.store.dispatch(FetchUser).subscribe(() => this.router.navigate([RouteEnum.HOME]));
   }
 
   public login(username: string, password: string): void {
